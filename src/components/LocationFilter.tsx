@@ -1,5 +1,6 @@
 import { ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
 
 const locations = [
   'NCR job',
@@ -10,6 +11,18 @@ const locations = [
 ];
 
 export const LocationFilter = () => {
+  const navigate = useNavigate();
+
+  const handleLocationClick = (location: string) => {
+    const locationMap = {
+      'NCR job': 'ncr',
+      'Gujarat Job': 'gujarat', 
+      'Pune job': 'pune',
+      'Rajasthan': 'rajasthan',
+      'Haryana': 'haryana'
+    };
+    navigate(`/jobs/${locationMap[location as keyof typeof locationMap]}`);
+  };
   return (
     <section className="py-12 bg-muted/30">
       <div className="container mx-auto px-4">
@@ -18,6 +31,7 @@ export const LocationFilter = () => {
           {locations.map((location, index) => (
             <div 
               key={location}
+              onClick={() => handleLocationClick(location)}
               className="bg-white border border-gray-300 px-6 py-3 text-foreground font-medium hover:bg-gray-50 cursor-pointer transition-colors"
               style={{ 
                 borderRight: index === locations.length - 1 ? '1px solid #d1d5db' : 'none',

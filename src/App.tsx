@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Header } from "@/components/Header";
 import Index from "./pages/Index";
 import Profile from "./pages/Profile";
+import JobListings from "./pages/JobListings";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -45,6 +46,10 @@ const App = () => {
             <Route 
               path="/profile" 
               element={user ? <Profile user={user} /> : <Index onLogin={handleLogin} />} 
+            />
+            <Route 
+              path="/jobs/:location" 
+              element={<JobListings />} 
             />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
