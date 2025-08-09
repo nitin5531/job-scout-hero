@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Hero } from '@/components/Hero';
-import { JobCategories } from '@/components/JobCategories';
+import { LocationFilter } from '@/components/LocationFilter';
 import { FeaturedJobs } from '@/components/FeaturedJobs';
 import { Footer } from '@/components/Footer';
 
@@ -20,7 +20,7 @@ const Index = ({ onLogin }: IndexProps) => {
   return (
     <div className="min-h-screen bg-background">
       <Hero />
-      <JobCategories />
+      <LocationFilter />
       <FeaturedJobs />
       <Footer />
     </div>
