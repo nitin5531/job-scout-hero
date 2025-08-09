@@ -1,0 +1,101 @@
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Search, MapPin, Briefcase } from 'lucide-react';
+import heroImage from '@/assets/hero-bg.jpg';
+
+export const Hero = () => {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [location, setLocation] = useState('');
+  const [category, setCategory] = useState('');
+
+  const handleSearch = () => {
+    console.log('Searching for:', { searchQuery, location, category });
+  };
+
+  return (
+    <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${heroImage})` }}
+      />
+      
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-gradient-hero" />
+      
+      {/* Content */}
+      <div className="relative z-10 container mx-auto px-4 text-center text-white">
+        <div className="max-w-4xl mx-auto space-y-8 animate-slide-up">
+          <div className="space-y-4">
+            <h1 className="text-5xl md:text-7xl font-bold leading-tight">
+              Find Your Dream
+              <span className="block text-secondary"> Career in India</span>
+            </h1>
+            <p className="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto leading-relaxed">
+              Discover thousands of job opportunities from top companies across India. 
+              Your next career milestone awaits.
+            </p>
+          </div>
+          
+          {/* Search Bar */}
+          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 shadow-2xl">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <div className="relative md:col-span-2">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                <Input
+                  placeholder="Job title, skills, or company"
+                  className="pl-10 h-12 bg-white border-0 text-foreground placeholder:text-muted-foreground"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+              </div>
+              
+              <div className="relative">
+                <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground z-10" />
+                <Select value={location} onValueChange={setLocation}>
+                  <SelectTrigger className="pl-10 h-12 bg-white border-0 text-foreground">
+                    <SelectValue placeholder="Location" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="mumbai">Mumbai</SelectItem>
+                    <SelectItem value="delhi">Delhi</SelectItem>
+                    <SelectItem value="bangalore">Bangalore</SelectItem>
+                    <SelectItem value="hyderabad">Hyderabad</SelectItem>
+                    <SelectItem value="pune">Pune</SelectItem>
+                    <SelectItem value="chennai">Chennai</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              
+              <Button 
+                onClick={handleSearch}
+                size="lg" 
+                className="h-12 bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold"
+              >
+                Search Jobs
+              </Button>
+            </div>
+          </div>
+          
+          {/* Stats */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+            <div className="text-center animate-scale-in">
+              <div className="text-4xl font-bold text-secondary">50K+</div>
+              <div className="text-white/80">Active Jobs</div>
+            </div>
+            <div className="text-center animate-scale-in">
+              <div className="text-4xl font-bold text-secondary">10K+</div>
+              <div className="text-white/80">Companies</div>
+            </div>
+            <div className="text-center animate-scale-in">
+              <div className="text-4xl font-bold text-secondary">1M+</div>
+              <div className="text-white/80">Job Seekers</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
